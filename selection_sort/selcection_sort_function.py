@@ -1,8 +1,9 @@
 def selection_sort(arr):
     length = len(arr)
     for i in range(length-1):
-        maximum = float('-inf')
-        for j in range(length-i):
+        maximum = arr[0]
+        max_ind = 0
+        for j in range(1, length-i):
             if arr[j] > maximum:
                 maximum = arr[j]
                 max_ind = j

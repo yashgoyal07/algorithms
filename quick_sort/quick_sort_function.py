@@ -1,8 +1,8 @@
 def quick_sort_function(arr, start, end):
     if start < end:
-        i = -1
+        i = start - 1
         pivot = arr[end]
-        for j in range(end):
+        for j in range(start, end):
             if arr[j] < pivot:
                 i += 1
                 arr[i], arr[j] = arr[j], arr[i]

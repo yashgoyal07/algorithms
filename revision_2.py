@@ -11,7 +11,7 @@ def selection(arr):
     for i in range(length-1):
         maximum = arr[0]
         max_ind = 0
-        for j in range(length-i):
+        for j in range(1, length-i):
             if arr[j] > maximum:
                 maximum = arr[j]
                 max_ind = j
@@ -23,7 +23,7 @@ def insertion(arr):
     for i in range(1, length):
         current_value = arr[i]
         position = i
-        while position > 0 and current_value < arr[position-1]:
+        while current_value < arr[position-1] and position > 0:
             arr[position] = arr[position-1]
             position -= 1
         arr[position] = current_value
@@ -31,8 +31,8 @@ def insertion(arr):
 
 def merge(arr):
     length = len(arr)
-    mid = length // 2
     if length > 1:
+        mid = length // 2
         first_part = arr[:mid]
         second_part = arr[mid:]
         merge(first_part)
@@ -59,22 +59,28 @@ def merge(arr):
             k += 1
 
 
-def quick(arr, start, end):
-    if start < end:
-        pivot = arr[end]
-        i = start - 1
-        for j in range(start, end):
+def quick(arr, low, high):
+    if low < high:
+        pivot = arr[high]
+        i = low - 1
+        for j in range(low, high):
             if arr[j] < pivot:
                 i += 1
                 arr[i], arr[j] = arr[j], arr[i]
-        arr[i+1], arr[end] = arr[end], arr[i+1]
-        pi = i+1
-        quick(arr, start, pi-1)
-        quick(arr, pi+1, end)
+        arr[i+1], arr[high] = arr[high], arr[i+1]
+        pi = i + 1
+        quick(arr, low, pi-1)
+        quick(arr, pi+1, high)
 
 
 if __name__ == '__main__':
     array = list(map(int, input().split()))
-    quick(array, 0, len(array)-1)
+    # bubble(array)
+    # selection(array)
+    # insertion(array)
+    # merge(array)
+    end = len(array) - 1
+    start = 0
+    quick(array, start, end)
     for element in array:
         print(element, end=' ')
